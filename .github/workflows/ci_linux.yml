@@ -1,10 +1,8 @@
 name: CI-Linux
 
 on:
-  workflow_dispatch:
   push:
-    branches:
-      - master
+    branches: [ "master", "ubuntu_workflow" ]
     paths-ignore:
       - 'README.md'
   pull_request:
