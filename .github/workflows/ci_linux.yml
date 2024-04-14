@@ -1,0 +1,54 @@
+name: CI-Linux
+
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - 'README.md'
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - 'README.md'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: '6.6'
+        modules: 'qtmultimedia'
+
+    - name: Install build dependencies
+      run: >
+        sudo apt install -y
+        libavutil-dev
+        libavcodec-dev
+        libavformat-dev 
+        libavfilter-dev 
+        libswscale-dev
+        libswresample-dev
+
+    - name: Build
+      run: |
+        cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Release
+        cmake --build ${{github.workspace}}/build
+
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: si-edit
+        path: |
+          ${{github.workspace}}/build/app/si-edit
+          ${{github.workspace}}/build/lib/liblibweaver.so
+        if-no-files-found: error
+
