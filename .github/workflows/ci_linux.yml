@@ -37,6 +37,7 @@ jobs:
         libswscale-dev
         libswresample-dev
         libfuse2
+        libxcb-cursor0
 
     - name: Build
       run: |
