@@ -67,14 +67,14 @@ jobs:
         --plugin qt
         --output appimage
 
-    - name: Upload Artifact: libweaver
+    - name: 'Upload Artifact: libweaver'
       uses: actions/upload-artifact@v4
       with:
         name: libweaver-Linux
         path: ${{github.workspace}}/build/lib/liblibweaver.so
         if-no-files-found: error
 
-    - name: Upload Artifact: AppImage
+    - name: 'Upload Artifact: AppImage'
       uses: actions/upload-artifact@v4
       with:
         name: SI-Edit-Linux.AppImage
