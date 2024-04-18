@@ -40,7 +40,7 @@ jobs:
         APPIMAGE_DEPS: >
           libfuse2
           libxcb-cursor0
-      run: sudo apt install -y "$FFMPEG_DEPS" "$APPIMAGE_DEPS"
+      run: sudo apt install -y $FFMPEG_DEPS $APPIMAGE_DEPS
 
     - name: Build
       run: |
